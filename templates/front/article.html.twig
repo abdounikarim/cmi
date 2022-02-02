@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+        <hr>
+
+        <h2 class="mt-5">Commentaires</h2>
+        <br>
+
+        <div id="new_comment">
+            <a href="{{ path('comment_new') }}">Nouveau commentaire</a>
+        </div>
+        <br>
+
+        <div id="comment">
+            {% for comment in article.comments %}
+                <div class="comment">
+                    <h2>
+                        <a href="{{ path('front_comment', {
+                            id: comment.id
+                        }) }}">
+                            {{ comment.id }}
+                        </a>
+                    </h2>
+                    <p>{{ comment.content }}</p>
+                    <p>Par : {{ comment.pseudo.email }}</p>
+                    <p><em>Nombre de sous-commentaires : </em><b>{{ comment.children|length }}</b></p>
+                    <p>Article associé : {{ comment.article.title }}</p>
+                    <hr>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

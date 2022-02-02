@@ -1,0 +1,6 @@
+App\Entity\Article:
+    article_{1..4}:
+        title: <text(128)>
+        content: <text(10000)>
+        createdAt: <(new \DateTimeImmutable('now'))>
+        updatedAt: <(new \DateTimeImmutable('now'))>

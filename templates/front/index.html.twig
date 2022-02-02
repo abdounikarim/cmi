@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">Articles</h1>
+        <br>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('article_new') }}">Nouvel article</a>
+        {% endif %}
+
+        <div id="article">
+            {% for article in articles %}
+                <div class="article">
+                    <h2>
+                        <a href="{{ path('front_article', {
+                            id: article.id
+                        }) }}">
+                            {{ article.title }}
+                        </a>
+                    </h2>
+                    <p>{{ article.content|slice(0, 420) }}...</p>
+                    <p><em>Nombre de commentaires : </em><b>{{ article.comments|length }}</b></p>
+                    <hr>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+        <br>
+
+        <h1 class="mt-5">Commentaires</h1>
+        <br>
+
+        <div id="new_comment">
+            <a href="{{ path('comment_new') }}">Nouveau commentaire</a>
+        </div>
+        <br>
+
+        <div id="comment">
+            {% for comment in comments %}
+                <div class="comment">
+                    <h2>
+                        <a href="{{ path('front_comment', {
+                            id: comment.id
+                        }) }}">
+                            {{ comment.id }}
+                        </a>
+                    </h2>
+                    <p>{{ comment.content }}</p>
+                    <p>Par : {{ comment.pseudo.email }}</p>
+                    <p><em>Nombre de sous-commentaires : </em><b>{{ comment.children|length }}</b></p>
+                    <p>Article associé : {{ comment.article.title }}</p>
+                    <hr>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

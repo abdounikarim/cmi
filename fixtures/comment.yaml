@@ -1,0 +1,20 @@
+App\Entity\Comment:
+    comment_{1..3}:
+        article: '@article_1'
+        content: <text()>
+        pseudo: '@user_1'
+
+    comment_{6..10}:
+        content: <text()>
+        parent: '@comment_1'
+        pseudo: '@user_1'
+
+    comment_{11..13}:
+        content: <text()>
+        parent: '@comment_2'
+        pseudo: '@user_1'
+
+    comment_{14..15}:
+        content: <text()>
+        parent: '@comment_3'
+        pseudo: '@user_1'
